@@ -1,0 +1,23 @@
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Target Directories #
+*target/
+
+# Eclipse metadata #
+*.project
+*.classpath
+*.settings/
+
+# Junk Files #
+*.DS_Store
+
+# IntelliJ IDEA metadata #
+*.iml
