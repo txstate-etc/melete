@@ -133,7 +133,7 @@
         <artifactId>tomahawk</artifactId>
         <version>1.1.11</version>
     </dependency>
-    <dependency> 
+    <dependency>
         <groupId>org.j4j</groupId>
         <artifactId>j4j</artifactId>
         <version>1.0</version>
