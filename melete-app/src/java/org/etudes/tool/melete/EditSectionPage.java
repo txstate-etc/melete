@@ -55,6 +55,7 @@ import org.sakaiproject.entity.api.ResourcePropertiesEdit;
 import org.sakaiproject.tool.cover.ToolManager;
 import org.sakaiproject.user.api.User;
 import org.sakaiproject.user.cover.UserDirectoryService;
+import org.sakaiproject.util.FormattedText;
 import org.sakaiproject.util.ResourceLoader;
 
 import org.sakaiproject.event.cover.EventTrackingService;
@@ -433,7 +434,21 @@ public class EditSectionPage extends SectionPage implements Serializable
 				contentEmpty = true;
 			}
 		}	
-		
+		//Anne added 9/18/17: Check content for XSS
+		StringBuilder alertMsg = new StringBuilder();
+		try
+		{
+			String text = FormattedText.processFormattedText(contentEditor, alertMsg);
+			if (alertMsg.length() > 0){
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "failed_content_cleaner", alertMsg.toString()));
+			}
+			contentEditor = text;
+		}
+		catch (Exception e)
+		{
+			if (logger.isDebugEnabled()) logger.debug("Failed to clean content.");
+				return "failure";
+		}
 		Boolean modifyContentResource = false;
 		binding =  Util.getBinding("#{licensePage}");
 		 LicensePage lPage = (LicensePage)binding.getValue(context);
